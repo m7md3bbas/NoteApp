@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors.dart';
-import 'package:noteapp/Screens/Editor.dart';
+import 'package:noteapp/Screens/editor.dart';
 
 class ButtonToAddNote extends StatelessWidget {
   const ButtonToAddNote({

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Screens/search.dart';
 import 'package:noteapp/Screens/widgets/custom_icon_button_widget.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -19,7 +20,10 @@ class HomeHeader extends StatelessWidget {
         Spacer(),
         CustomIconButtonWidget(
           icon: Icons.search,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Search()));
+          },
         ),
         SizedBox(width: 20),
         CustomIconButtonWidget(
