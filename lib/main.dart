@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/Core/colors.dart';
 import 'package:noteapp/Screens/home.dart';
-import 'package:noteapp/core/constant.dart';
 
 void main() {
   runApp(const NotesApp());
@@ -11,11 +11,11 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: styles.backgroundColor,
-        body: const Home(),
+        backgroundColor: MyColors.primaryColor,
+        body: Home(),
       ),
     );
   }

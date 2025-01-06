@@ -73,9 +73,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Roboto
+    - family: Nunito
       fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/Fonts/Nunito-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
