@@ -17,7 +17,9 @@ class NotesApp extends StatelessWidget {
         home: Scaffold(
           backgroundColor: MyColors.primaryColor,
           body: Home(),
-          floatingActionButton: ButtonToAddNote(),
+          floatingActionButton: ButtonToAddNote(
+          
+          ),
         ));
   }
 }

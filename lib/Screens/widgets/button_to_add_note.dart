@@ -1,14 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Screens/Editor.dart';
 
 class ButtonToAddNote extends StatelessWidget {
   const ButtonToAddNote({
     super.key,
-    this.onPressed,
   });
-
-  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +15,10 @@ class ButtonToAddNote extends StatelessWidget {
       child: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         backgroundColor: MyColors.primaryColor,
-        onPressed: onPressed,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const Editor()));
+        },
         child: Icon(
           Icons.add,
           color: MyColors.textColor,
