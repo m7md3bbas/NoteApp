@@ -10,17 +10,19 @@ class Editor extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.primaryColor,
       body: SafeArea(
-          child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Expanded(child: EditorHeader()),
-            SizedBox(height: 20),
-            Expanded(child: EditorBody()),
-            Spacer()
-          ],
-        ),
-      )),
+          child: SingleChildScrollView(
+            child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+            children: [
+              EditorHeader(),
+              SizedBox(height: 20),
+              EditorBody(),
+            
+            ],
+                    ),
+                  ),
+          )),
     );
   }
 }
@@ -33,28 +35,40 @@ class EditorBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          decoration: InputDecoration(
-              hintText: "Title",
-              hintStyle: TextStyle(fontSize: 48, color: MyColors.textNoteColor),
-              border: InputBorder.none),
-          cursorHeight: 52,
-          controller: titleController,
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.18,
+          child: TextFormField(
+            expands: true,
+            maxLines: null,
+            minLines: null,
+            decoration: InputDecoration(
+                hintText: "Title",
+                hintStyle:
+                    TextStyle(fontSize: 48, color: MyColors.textNoteColor),
+                border: InputBorder.none),
+            cursorHeight: 52,
+            style: TextStyle(fontSize: 35, color: MyColors.textColor),
+            controller: titleController,
+          ),
         ),
         SizedBox(
           height: 20,
         ),
-        Expanded(
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.6,
           child: TextFormField(
             expands: true,
+            maxLines: null,
+            minLines: null,
             decoration: InputDecoration(
-                hintText: "Type something...",
-                border: InputBorder.none,
-                constraints: BoxConstraints.expand(),
-                hintStyle: TextStyle(
-                  color: MyColors.textNoteColor,
-                  fontSize: 23,
-                )),
+              hintText: "Type something...",
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                color: MyColors.textNoteColor,
+                fontSize: 23,
+              ),
+            ),
+            style: TextStyle(fontSize: 23, color: MyColors.textColor),
             cursorHeight: 35,
             controller: subjectController,
           ),
