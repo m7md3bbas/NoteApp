@@ -45,7 +45,6 @@ class Sqflite {
 
   void _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 3) {
-      // Add updated_at column
       await db.execute("ALTER TABLE notes ADD COLUMN updated_at DATETIME");
     }
   }

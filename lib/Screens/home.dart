@@ -17,6 +17,7 @@ class Home extends StatelessWidget {
           child: Column(
             children: [
               HomeHeader(),
+              SizedBox(height: 20),
               Expanded(child: HomeBody()),
             ],
           ),

@@ -16,7 +16,7 @@ class SearchBody extends StatelessWidget {
         stream: sqflite.searchdata(query), // Use the query passed to the widget
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CustomLoadingItems();
+            return Container();
           }
           if (snapshot.hasError) {
             return Text(
