@@ -17,11 +17,11 @@ class ButtonToAddNote extends StatelessWidget {
         backgroundColor: MyColors.primaryColor,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) =>  Editor()));
+              context, MaterialPageRoute(builder: (context) => Editor()));
         },
         child: Icon(
           Icons.add,
-          color: MyColors.textColor,
+          color: MyColors.getRandomColor(),
           size: 48,
         ),
       ),

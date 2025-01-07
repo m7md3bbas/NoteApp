@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors/colors.dart';
 
 class SearchHeader extends StatelessWidget {
-  const SearchHeader({super.key, required this.controller, required this.onChanged});
+  const SearchHeader(
+      {super.key, required this.controller, required this.onChanged});
   final TextEditingController controller;
   final Function(String) onChanged;
 
@@ -19,11 +20,11 @@ class SearchHeader extends StatelessWidget {
         style: TextStyle(color: MyColors.textColor, fontSize: 20),
         decoration: InputDecoration(
             hintText: "Search",
-            hintStyle: TextStyle(color: MyColors.textColor),
+            hintStyle: TextStyle(color: MyColors.textColor, fontSize: 20),
             border: InputBorder.none,
             suffixIcon: Icon(
               Icons.search,
-              color: MyColors.textColor,
+              color: MyColors.getRandomColor(),
             )),
         onChanged: onChanged, // Update the query on text change
       ),

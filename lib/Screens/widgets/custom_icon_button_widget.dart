@@ -19,7 +19,7 @@ class CustomIconButtonWidget extends StatelessWidget {
           onPressed: onPressed,
           icon: Icon(
             icon,
-            color: MyColors.textColor,
+            color: MyColors.getRandomColor(),
           )),
     );
   }

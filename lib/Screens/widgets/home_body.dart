@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors/colors.dart';
 import 'package:noteapp/Core/widgets/custom_fading.dart';
 import 'package:noteapp/Data/sqflite.dart';
+import 'package:noteapp/Screens/widgets/custom_loading_item.dart';
 import 'package:noteapp/Screens/widgets/custom_note_item.dart';
 
 class HomeBody extends StatefulWidget {
@@ -17,7 +18,6 @@ class _HomeBodyState extends State<HomeBody> {
   Sqflite sqflite = Sqflite.getInstance();
   List<Map> readdata = [];
   bool isloading = false;
- 
 
   void readData() async {
     isloading = true;
@@ -37,33 +37,7 @@ class _HomeBodyState extends State<HomeBody> {
   Widget build(BuildContext context) {
     return readdata.isNotEmpty
         ? isloading
-            ? ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) => CustomFadingWidget(
-                        child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(bottom: 10),
-                      decoration: BoxDecoration(
-                        color:MyColors.getRandomColor(),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListTile(
-                        title: Container(
-                          width: 10,
-                          height: 5,
-                          decoration: BoxDecoration(
-                            color: MyColors.textColor,
-                          ),
-                        ),
-                        subtitle: Container(
-                          width: 5,
-                          height: 5,
-                          decoration: BoxDecoration(
-                            color: MyColors.textColor,
-                          ),
-                        ),
-                      ),
-                    )))
+            ? CustomLoadingItems()
             : ListView.builder(
                 itemBuilder: (context, index) {
                   return Dismissible(
@@ -76,7 +50,7 @@ class _HomeBodyState extends State<HomeBody> {
                       alignment: Alignment.centerRight,
                       padding: EdgeInsets.only(right: 20),
                       decoration: BoxDecoration(
-                        color:MyColors.getRandomColor(),
+                        color: MyColors.getRandomColor(),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(
@@ -86,7 +60,7 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                     child: CustomNoteItem(
                       date: readdata[index]["created_at"],
-                      color:MyColors. getRandomColor(),
+                      color: MyColors.getRandomColor(),
                       id: readdata[index]["id"],
                       title: readdata[index]["title"],
                       content: readdata[index]["content"],

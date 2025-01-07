@@ -14,12 +14,13 @@ class HomeHeader extends StatelessWidget {
           "Notes",
           style: TextStyle(
               fontSize: 43,
-              color: MyColors.textColor,
+              color: MyColors.getRandomColor(),
               fontWeight: FontWeight.w600),
         ),
         Spacer(),
         CustomIconButtonWidget(
           icon: Icons.search,
+          
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>  Search()));

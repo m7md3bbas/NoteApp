@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors/colors.dart';
 import 'package:noteapp/Data/sqflite.dart';
 import 'package:noteapp/Screens/edit_note_screen.dart';
+import 'package:noteapp/Screens/widgets/custom_loading_item.dart';
 
 class SearchBody extends StatelessWidget {
   SearchBody({super.key, required this.query});
@@ -15,19 +16,19 @@ class SearchBody extends StatelessWidget {
         stream: sqflite.searchdata(query), // Use the query passed to the widget
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const CustomLoadingItems();
           }
           if (snapshot.hasError) {
             return Text(
               'Error: ${snapshot.error}',
-              style: TextStyle(color: MyColors.textColor),
+              style: TextStyle(color: MyColors.getRandomColor()),
             );
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(
                 child: Text(
               "No data found",
-              style: TextStyle(color: MyColors.textColor),
+              style: TextStyle(color: MyColors.getRandomColor()),
             ));
           }
           if (snapshot.hasData) {
@@ -37,7 +38,7 @@ class SearchBody extends StatelessWidget {
                       "Search",
                       style: TextStyle(
                         fontSize: 18,
-                        color: MyColors.textColor.withOpacity(0.6),
+                        color: MyColors.getRandomColor().withOpacity(0.6),
                       ),
                     ),
                   )
@@ -89,7 +90,7 @@ class SearchBody extends StatelessWidget {
                     },
                   );
           }
-          return const Center(child: CircularProgressIndicator());
+          return Container();
         },
       ),
     );

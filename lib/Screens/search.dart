@@ -35,7 +35,7 @@ class _SearchState extends State<Search> {
               SizedBox(height: 10),
               Text(
                 "Result",
-                style: TextStyle(color: MyColors.textColor),
+                style: TextStyle(color: MyColors.getRandomColor()),
               ),
               SizedBox(height: 10),
               SearchBody(query: query), // Pass query to SearchBody
