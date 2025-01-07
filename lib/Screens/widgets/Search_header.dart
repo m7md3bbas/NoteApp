@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors/colors.dart';
 
 class SearchHeader extends StatelessWidget {
-  SearchHeader({super.key});
-  TextEditingController controller = TextEditingController();
+  const SearchHeader({super.key, required this.controller, required this.onChanged});
+  final TextEditingController controller;
+  final Function(String) onChanged;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,6 +25,7 @@ class SearchHeader extends StatelessWidget {
               Icons.search,
               color: MyColors.textColor,
             )),
+        onChanged: onChanged, // Update the query on text change
       ),
     );
   }

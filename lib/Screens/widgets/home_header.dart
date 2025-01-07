@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
           icon: Icons.search,
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Search()));
+                MaterialPageRoute(builder: (context) =>  Search()));
           },
         ),
         SizedBox(width: 20),

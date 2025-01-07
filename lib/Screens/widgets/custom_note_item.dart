@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors/colors.dart';
 import 'package:noteapp/Screens/edit_note_screen.dart';
 
 class CustomNoteItem extends StatelessWidget {

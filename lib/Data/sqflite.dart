@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -61,6 +63,24 @@ class Sqflite {
       print("Error reading data: $e");
       return [];
     }
+  }
+
+  Stream<List<Map>> searchdata(String query) {
+    final controller = StreamController<List<Map>>.broadcast();
+
+    Future.delayed(Duration.zero, () async {
+      try {
+        await getDatabase();
+        String sql = "SELECT * FROM notes WHERE title LIKE ? OR content LIKE ?";
+        var result = await _database!.rawQuery(sql, ['%$query%', '%$query%']);
+        controller.add(result);
+      } catch (e) {
+        print("Error searching data: $e");
+        controller.add([]); // Return empty list on error
+      }
+    });
+
+    return controller.stream;
   }
 
   Future<int> insertdata(

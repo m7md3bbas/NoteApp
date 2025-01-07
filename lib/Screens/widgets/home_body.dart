@@ -17,16 +17,7 @@ class _HomeBodyState extends State<HomeBody> {
   Sqflite sqflite = Sqflite.getInstance();
   List<Map> readdata = [];
   bool isloading = false;
-  Color getRandomColor() {
-    final Random random = Random();
-    int minColorValue = 100;
-    return Color.fromARGB(
-      255, // Alpha (opacity)
-      minColorValue + random.nextInt(256 - minColorValue), // Red (0-255)
-      minColorValue + random.nextInt(256 - minColorValue), // Green (0-255)
-      minColorValue + random.nextInt(256 - minColorValue), // Blue (0-255)
-    );
-  }
+ 
 
   void readData() async {
     isloading = true;
@@ -53,7 +44,7 @@ class _HomeBodyState extends State<HomeBody> {
                       width: double.infinity,
                       margin: const EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
-                        color: getRandomColor(),
+                        color:MyColors.getRandomColor(),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: ListTile(
@@ -85,7 +76,7 @@ class _HomeBodyState extends State<HomeBody> {
                       alignment: Alignment.centerRight,
                       padding: EdgeInsets.only(right: 20),
                       decoration: BoxDecoration(
-                        color: getRandomColor(),
+                        color:MyColors.getRandomColor(),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(
@@ -95,7 +86,7 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                     child: CustomNoteItem(
                       date: readdata[index]["created_at"],
-                      color: getRandomColor(),
+                      color:MyColors. getRandomColor(),
                       id: readdata[index]["id"],
                       title: readdata[index]["title"],
                       content: readdata[index]["content"],
