@@ -10,7 +10,13 @@ class SearchBody extends StatelessWidget {
       child: ListView.builder(
         itemCount: 5,
         itemBuilder: (context, index) {
-          return CustomNoteItem();
+          return CustomNoteItem(
+            date: "mohamed",
+            color: Colors.red,
+            id: 5,
+            title: "mohamed",
+            content: "mohamed",
+          );
         },
       ),
     );

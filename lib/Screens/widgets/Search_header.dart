@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Core/colors/colors.dart';
 
 class SearchHeader extends StatelessWidget {
   SearchHeader({super.key});

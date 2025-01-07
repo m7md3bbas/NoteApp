@@ -3,16 +3,18 @@ import 'package:noteapp/Data/sqflite.dart';
 import 'package:noteapp/Screens/home.dart';
 import 'package:noteapp/Screens/widgets/custom_icon_button_widget.dart';
 
-class EditorHeader extends StatelessWidget {
-  EditorHeader({
-    super.key,
-    required this.titleController,
-    required this.contentController,
-  });
+class NoteEditHeader extends StatelessWidget {
+  NoteEditHeader(
+      {super.key,
+      required this.contentController,
+      required this.titleController,
+      required this.id});
 
-  final TextEditingController titleController;
   final TextEditingController contentController;
-  final Sqflite sqflite = Sqflite.getInstance();
+  final TextEditingController titleController;
+  final int id;
+
+  Sqflite sqflite = Sqflite.getInstance();
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +23,15 @@ class EditorHeader extends StatelessWidget {
         CustomIconButtonWidget(
           icon: Icons.arrow_back_ios,
           onPressed: () {
-            Navigator.pop(context);
+            // Return to previous screen
+            Navigator.pop(context, true);
           },
         ),
         Spacer(),
         CustomIconButtonWidget(
           icon: Icons.remove_red_eye_outlined,
           onPressed: () {
-            // Placeholder for preview functionality
+            // Placeholder for preview functionality (if needed)
           },
         ),
         SizedBox(width: 20),
@@ -38,18 +41,24 @@ class EditorHeader extends StatelessWidget {
             String title = titleController.text.trim();
             String content = contentController.text.trim();
 
+            // Check if the title or content is empty
             if (title.isEmpty || content.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Title and content cannot be empty!'),
+                SnackBar(
+                  content: Text(
+                    title.isEmpty
+                        ? 'Title cannot be empty!'
+                        : 'Content cannot be empty!',
+                  ),
                 ),
               );
               return;
             }
 
-            await sqflite.insertdata(content: content, title: title);
+            // Update the note in the database
+            await sqflite.updatedata(content: content, title: title, id: id);
 
-            // Navigate to Home after saving
+            // Navigate back to the Home screen after saving the note
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const Home()),

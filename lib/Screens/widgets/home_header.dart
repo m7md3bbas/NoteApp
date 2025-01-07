@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Core/colors/colors.dart';
 import 'package:noteapp/Screens/search.dart';
 import 'package:noteapp/Screens/widgets/custom_icon_button_widget.dart';
 

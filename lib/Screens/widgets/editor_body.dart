@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Core/colors/colors.dart';
 
 class EditorBody extends StatelessWidget {
-  EditorBody({super.key});
-  TextEditingController titleController = TextEditingController();
-  TextEditingController subjectController = TextEditingController();
+  const EditorBody(
+      {super.key,
+      required this.titleController,
+      required this.subjectController});
+  final TextEditingController titleController;
+  final TextEditingController subjectController;
   @override
   Widget build(BuildContext context) {
     return Column(

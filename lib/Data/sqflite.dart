@@ -5,10 +5,10 @@ class Sqflite {
   Database? _database;
   static Sqflite? _sqflite;
 
-  Sqflite._privateConstractor();
+  Sqflite._privateConstructor();
 
   static Sqflite getInstance() {
-    _sqflite ??= Sqflite._privateConstractor();
+    _sqflite ??= Sqflite._privateConstructor();
     return _sqflite!;
   }
 
@@ -18,52 +18,94 @@ class Sqflite {
   }
 
   Future<Database> initializeDatabase() async {
-    String dbpath = await getDatabasesPath();
-    String path = join(dbpath, "note.db");
+    String dbPath = await getDatabasesPath();
+    String path = join(dbPath, "note.db");
     _database = await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
     return _database!;
   }
 
   void _onCreate(Database db, int version) async {
-    Batch batch = db.batch();
-    batch.execute('''
-CREATE TABLE notes (
-  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  title TEXT NOT NULL,
-  content TEXT NOT NULL
-)
-''');
+    await db.execute('''
+      CREATE TABLE notes (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME
+      )
+    ''');
   }
 
-//readdata'
+  void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 3) {
+      // Add updated_at column
+      await db.execute("ALTER TABLE notes ADD COLUMN updated_at DATETIME");
+    }
+  }
+
+  String formatDateTime(DateTime dateTime) {
+    return dateTime.toIso8601String().split('T').join(' ').substring(0, 19);
+  }
+
   Future<List<Map>> readdata() async {
-    await getDatabase();
-    String sql = "SELECT * FROM notes";
-    return await _database!.rawQuery(sql);
+    try {
+      await getDatabase();
+      String sql = "SELECT * FROM notes";
+      return await _database!.rawQuery(sql);
+    } catch (e) {
+      print("Error reading data: $e");
+      return [];
+    }
   }
 
-//insertdata
-  Future<int> insertdata(String title, String content) async {
-    await getDatabase();
-    String sql = "INSERT INTO notes (title, content) VALUES (?, ?)";
-    return await _database!.rawInsert(sql, [title, content]);
+  Future<int> insertdata(
+      {required String title, required String content}) async {
+    try {
+      await getDatabase();
+      String sql =
+          "INSERT INTO notes (title, content, created_at) VALUES (?, ?, ?)";
+      return await _database!
+          .rawInsert(sql, [title, content, formatDateTime(DateTime.now())]);
+    } catch (e) {
+      print("Error inserting data: $e");
+      return -1;
+    }
   }
 
-//updatedata
-  Future<int> updatedata(int id, String title, String content) async {
-    await getDatabase();
-    String sql = "UPDATE notes SET title = ?, content = ? WHERE id = ?";
-    return await _database!.rawUpdate(sql, [title, content, id]);
+  Future<int> updatedata(
+      {required int id, required String title, required String content}) async {
+    try {
+      await getDatabase();
+      String sql =
+          "UPDATE notes SET title = ?, content = ?, created_at = ? WHERE id = ?";
+      return await _database!
+          .rawUpdate(sql, [title, content, formatDateTime(DateTime.now()), id]);
+    } catch (e) {
+      print("Error updating data: $e");
+      return -1;
+    }
   }
 
-//deletedata
   Future<int> deletedata(int id) async {
-    await getDatabase();
-    String sql = "DELETE FROM notes WHERE id = ?";
-    return await _database!.rawDelete(sql, [id]);
+    try {
+      await getDatabase();
+      String sql = "DELETE FROM notes WHERE id = ?";
+      return await _database!.rawDelete(sql, [id]);
+    } catch (e) {
+      print("Error deleting data: $e");
+      return -1;
+    }
+  }
+
+  Future<void> closeDatabase() async {
+    if (_database != null) {
+      await _database!.close();
+      _database = null;
+    }
   }
 }

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/Core/colors/colors.dart';
+import 'package:noteapp/Screens/widgets/edit_note_screen.dart';
 import 'package:noteapp/Screens/widgets/editor_body.dart';
-import 'package:noteapp/Screens/widgets/editor_header.dart';
 
-class Editor extends StatelessWidget {
-  Editor({super.key});
-  TextEditingController contentController = TextEditingController();
-  TextEditingController titleController = TextEditingController();
+class EditNoteScreen extends StatelessWidget {
+  const EditNoteScreen(
+      {super.key,
+      required this.contentController,
+      required this.titleController,
+      required this.id});
+  final TextEditingController contentController;
+  final TextEditingController titleController;
+  final int id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +23,10 @@ class Editor extends StatelessWidget {
           child: Column(
             spacing: 20,
             children: [
-              EditorHeader(
-                contentController: contentController,
-                titleController: titleController,
-              ),
+              NoteEditHeader(
+                  contentController: contentController,
+                  titleController: titleController,
+                  id: id),
               EditorBody(
                 subjectController: contentController,
                 titleController: titleController,

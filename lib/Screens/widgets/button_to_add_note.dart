@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Core/colors/colors.dart';
 import 'package:noteapp/Screens/editor.dart';
 
 class ButtonToAddNote extends StatelessWidget {
@@ -17,7 +17,7 @@ class ButtonToAddNote extends StatelessWidget {
         backgroundColor: MyColors.primaryColor,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const Editor()));
+              context, MaterialPageRoute(builder: (context) =>  Editor()));
         },
         child: Icon(
           Icons.add,

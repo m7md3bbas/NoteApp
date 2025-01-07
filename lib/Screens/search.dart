@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Core/colors/colors.dart';
 import 'package:noteapp/Screens/widgets/Search_header.dart';
-import 'package:noteapp/Screens/widgets/custom_note_item.dart';
 import 'package:noteapp/Screens/widgets/search_body.dart';
 
 class Search extends StatelessWidget {

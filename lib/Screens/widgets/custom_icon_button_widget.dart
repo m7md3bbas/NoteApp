@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Core/colors.dart';
+import 'package:noteapp/Core/colors/colors.dart';
 
 class CustomIconButtonWidget extends StatelessWidget {
   const CustomIconButtonWidget({
